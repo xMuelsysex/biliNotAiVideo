@@ -21,3 +21,5 @@ Entries are workspace records, not authoritative runtime decisions.
 | 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task1-extension-gates.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task1-extension-gates |
 | 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task1-reviews.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task1-reviews |
 | 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/resume-state-hint.json | 2026-07-20-desktop-ai-video-identification-mvp resume state hint |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task2-scoring-gates.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task2-scoring-gates |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task2-reviews.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task2-reviews |
