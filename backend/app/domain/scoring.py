@@ -108,8 +108,8 @@ def _validate_unique_outputs(
         detector = _validate_output(raw_input)
         if detector.kind in seen:
             raise InvalidDetectorOutput(
-                raw_input,
                 reason=f"duplicate detector kind: {detector.kind.value}",
+                detector_kind=detector.kind.value,
             )
         seen.add(detector.kind)
         validated.append(detector)
@@ -118,17 +118,32 @@ def _validate_unique_outputs(
 
 
 def _validate_output(raw_input: RawDetectorOutput) -> DetectorOutput:
-    if isinstance(raw_input, DetectorOutput):
-        return raw_input
-
     try:
         return DetectorOutput.model_validate(raw_input)
     except ValidationError as error:
+        details = error.errors(include_input=False, include_url=False)
         raise InvalidDetectorOutput(
-            raw_input,
             reason="invalid detector output",
-            validation_errors=tuple(error.errors()),
+            detector_kind=_detector_kind_hint(raw_input),
+            field_paths=tuple(_format_location(detail["loc"]) for detail in details),
+            error_codes=tuple(str(detail["type"]) for detail in details),
         ) from error
+
+
+def _detector_kind_hint(raw_input: RawDetectorOutput) -> str | None:
+    if isinstance(raw_input, DetectorOutput):
+        return raw_input.kind.value
+
+    kind = raw_input.get("kind")
+    if isinstance(kind, DetectorKind):
+        return kind.value
+    if isinstance(kind, str):
+        return kind[:64]
+    return None
+
+
+def _format_location(location: tuple[int | str, ...]) -> str:
+    return ".".join(str(part) for part in location)
 
 
 def _decimal(value: float) -> Decimal:

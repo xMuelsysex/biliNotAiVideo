@@ -5,12 +5,14 @@ class ScoringError(ValueError):
 class InvalidDetectorOutput(ScoringError):
     def __init__(
         self,
-        raw_input: object,
         *,
         reason: str,
-        validation_errors: tuple[object, ...] = (),
+        detector_kind: str | None = None,
+        field_paths: tuple[str, ...] = (),
+        error_codes: tuple[str, ...] = (),
     ) -> None:
-        self.raw_input = raw_input
         self.reason = reason
-        self.validation_errors = validation_errors
+        self.detector_kind = detector_kind
+        self.field_paths = field_paths
+        self.error_codes = error_codes
         super().__init__(reason)

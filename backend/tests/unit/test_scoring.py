@@ -221,8 +221,10 @@ def test_duplicate_detector_kinds_are_rejected() -> None:
             [detector(DetectorKind.TEXT, score=0.1), duplicate]
         )
 
-    assert error.value.raw_input is duplicate
     assert error.value.reason == "duplicate detector kind: text"
+    assert error.value.detector_kind == "text"
+    assert error.value.field_paths == ()
+    assert error.value.error_codes == ()
 
 
 @pytest.mark.parametrize(
@@ -258,10 +260,74 @@ def test_invalid_numeric_input_raises_typed_error(
     with pytest.raises(InvalidDetectorOutput) as error:
         aggregate_detector_outputs([raw])
 
-    assert error.value.raw_input is raw
     assert error.value.reason == "invalid detector output"
-    assert error.value.validation_errors
+    assert error.value.detector_kind == "text"
+    assert field in error.value.field_paths
+    assert error.value.error_codes
+    assert not hasattr(error.value, "raw_input")
     assert isinstance(error.value.__cause__, ValidationError)
+
+
+def test_invalid_output_does_not_store_sensitive_input() -> None:
+    secret = "private transcript content"
+    raw: dict[str, object] = {
+        "kind": "text",
+        "score": secret,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+        "unexpected": secret,
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    assert secret not in str(error.value)
+    assert secret not in repr(vars(error.value))
+
+
+@pytest.mark.parametrize("value", ["0.5", True])
+def test_numeric_type_coercion_is_rejected(value: object) -> None:
+    raw: dict[str, object] = {
+        "kind": "text",
+        "score": value,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    assert error.value.field_paths == ("score",)
+
+
+def test_unknown_detector_fields_are_rejected() -> None:
+    raw: dict[str, object] = {
+        "kind": "text",
+        "score": 0.5,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+        "unexpected": "value",
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    assert error.value.field_paths == ("unexpected",)
+    assert error.value.error_codes == ("extra_forbidden",)
+
+
+def test_constructed_invalid_model_is_revalidated() -> None:
+    invalid = DetectorOutput.model_construct(
+        kind=DetectorKind.TEXT,
+        score=math.nan,
+        confidence=0.5,
+        material_factor=1.0,
+    )
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([invalid])
+
+    assert error.value.field_paths == ("score",)
 
 
 @pytest.mark.parametrize(
@@ -284,8 +350,12 @@ def test_domain_models_are_immutable(model: BaseModel) -> None:
         setattr(model, field_name, None)
 
 
-def test_detector_evidence_is_stored_as_an_immutable_tuple() -> None:
-    evidence = EvidenceItem(description="AI production method disclosed")
+def test_detector_evidence_is_structured_and_immutable() -> None:
+    evidence = EvidenceItem(
+        description="AI production method disclosed",
+        timestamp_seconds=12.5,
+        frame_index=3,
+    )
     output = DetectorOutput(
         kind=DetectorKind.TEXT,
         score=0.5,
@@ -295,8 +365,31 @@ def test_detector_evidence_is_stored_as_an_immutable_tuple() -> None:
     )
 
     assert output.evidence == (evidence,)
+    assert evidence.model_dump(mode="json") == {
+        "description": "AI production method disclosed",
+        "timestamp_seconds": 12.5,
+        "frame_index": 3,
+    }
     with pytest.raises(AttributeError):
         output.evidence.append(EvidenceItem(description="other"))
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"description": ""},
+        {"timestamp_seconds": -0.1},
+        {"timestamp_seconds": math.inf},
+        {"frame_index": -1},
+        {"unexpected": "value"},
+    ],
+)
+def test_evidence_field_constraints_are_enforced(changes: dict[str, object]) -> None:
+    values: dict[str, object] = {"description": "signal"}
+    values.update(changes)
+
+    with pytest.raises(ValidationError):
+        EvidenceItem.model_validate(values)
 
 
 def test_declaration_states_have_stable_serialized_values() -> None:
