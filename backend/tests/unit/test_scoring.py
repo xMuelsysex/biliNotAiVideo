@@ -1,4 +1,5 @@
 import math
+import traceback
 from typing import Literal
 
 import pytest
@@ -265,7 +266,8 @@ def test_invalid_numeric_input_raises_typed_error(
     assert field in error.value.field_paths
     assert error.value.error_codes
     assert not hasattr(error.value, "raw_input")
-    assert isinstance(error.value.__cause__, ValidationError)
+    assert error.value.__cause__ is None
+    assert error.value.__context__ is None
 
 
 def test_invalid_output_does_not_store_sensitive_input() -> None:
@@ -281,8 +283,46 @@ def test_invalid_output_does_not_store_sensitive_input() -> None:
     with pytest.raises(InvalidDetectorOutput) as error:
         aggregate_detector_outputs([raw])
 
+    formatted = "".join(
+        traceback.format_exception(
+            type(error.value),
+            error.value,
+            error.value.__traceback__,
+        )
+    )
     assert secret not in str(error.value)
     assert secret not in repr(vars(error.value))
+    assert secret not in formatted
+    assert error.value.__cause__ is None
+    assert error.value.__context__ is None
+
+
+def test_unknown_detector_kind_is_not_copied_into_error() -> None:
+    secret = "private detector payload"
+    raw: dict[str, object] = {
+        "kind": secret,
+        "score": 0.5,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    formatted = "".join(
+        traceback.format_exception(
+            type(error.value),
+            error.value,
+            error.value.__traceback__,
+        )
+    )
+    assert error.value.detector_kind is None
+    assert error.value.field_paths == ("kind",)
+    assert secret not in str(error.value)
+    assert secret not in repr(vars(error.value))
+    assert secret not in formatted
+    assert error.value.__cause__ is None
+    assert error.value.__context__ is None
 
 
 @pytest.mark.parametrize("value", ["0.5", True])

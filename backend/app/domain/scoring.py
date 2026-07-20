@@ -122,12 +122,14 @@ def _validate_output(raw_input: RawDetectorOutput) -> DetectorOutput:
         return DetectorOutput.model_validate(raw_input)
     except ValidationError as error:
         details = error.errors(include_input=False, include_url=False)
-        raise InvalidDetectorOutput(
+        sanitized_error = InvalidDetectorOutput(
             reason="invalid detector output",
             detector_kind=_detector_kind_hint(raw_input),
             field_paths=tuple(_format_location(detail["loc"]) for detail in details),
             error_codes=tuple(str(detail["type"]) for detail in details),
-        ) from error
+        )
+
+    raise sanitized_error
 
 
 def _detector_kind_hint(raw_input: RawDetectorOutput) -> str | None:
@@ -138,7 +140,10 @@ def _detector_kind_hint(raw_input: RawDetectorOutput) -> str | None:
     if isinstance(kind, DetectorKind):
         return kind.value
     if isinstance(kind, str):
-        return kind[:64]
+        try:
+            return DetectorKind(kind).value
+        except ValueError:
+            return None
     return None
 
 
