@@ -352,8 +352,45 @@ def test_unknown_detector_fields_are_rejected() -> None:
     with pytest.raises(InvalidDetectorOutput) as error:
         aggregate_detector_outputs([raw])
 
-    assert error.value.field_paths == ("unexpected",)
+    assert error.value.field_paths == ("<unknown>",)
     assert error.value.error_codes == ("extra_forbidden",)
+
+
+def test_unknown_field_names_are_redacted_and_bounded() -> None:
+    secrets = [f"private-field-{index}" for index in range(20)]
+    raw: dict[str, object] = {
+        "kind": "text",
+        "score": 0.5,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+        **{secret: "value" for secret in secrets},
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    diagnostics = repr(vars(error.value))
+    assert len(error.value.field_paths) == 8
+    assert set(error.value.field_paths) == {"<unknown>"}
+    assert all(secret not in diagnostics for secret in secrets)
+    assert all(len(path) <= 64 for path in error.value.field_paths)
+
+
+def test_nested_unknown_evidence_field_name_is_redacted() -> None:
+    secret = "private-nested-field"
+    raw: dict[str, object] = {
+        "kind": "text",
+        "score": 0.5,
+        "confidence": 0.5,
+        "material_factor": 1.0,
+        "evidence": [{"description": "signal", secret: "value"}],
+    }
+
+    with pytest.raises(InvalidDetectorOutput) as error:
+        aggregate_detector_outputs([raw])
+
+    assert error.value.field_paths == ("evidence.[].<unknown>",)
+    assert secret not in repr(vars(error.value))
 
 
 def test_constructed_invalid_model_is_revalidated() -> None:

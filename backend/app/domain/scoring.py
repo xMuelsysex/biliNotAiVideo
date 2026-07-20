@@ -23,6 +23,20 @@ _SCORE_QUANTUM = Decimal("1")
 _SCORE_SCALE = Decimal("100")
 _CONFIDENCE_THRESHOLD = Decimal("0.4000")
 _ZERO = Decimal("0")
+_MAX_ERROR_DETAILS = 8
+_MAX_FIELD_PATH_LENGTH = 64
+_SAFE_LOCATION_PARTS = frozenset(
+    {
+        "kind",
+        "score",
+        "confidence",
+        "material_factor",
+        "evidence",
+        "description",
+        "timestamp_seconds",
+        "frame_index",
+    }
+)
 
 
 def aggregate_detector_outputs(outputs: Iterable[RawDetectorOutput]) -> ScoreResult:
@@ -121,7 +135,9 @@ def _validate_output(raw_input: RawDetectorOutput) -> DetectorOutput:
     try:
         return DetectorOutput.model_validate(raw_input)
     except ValidationError as error:
-        details = error.errors(include_input=False, include_url=False)
+        details = error.errors(include_input=False, include_url=False)[
+            :_MAX_ERROR_DETAILS
+        ]
         sanitized_error = InvalidDetectorOutput(
             reason="invalid detector output",
             detector_kind=_detector_kind_hint(raw_input),
@@ -148,7 +164,16 @@ def _detector_kind_hint(raw_input: RawDetectorOutput) -> str | None:
 
 
 def _format_location(location: tuple[int | str, ...]) -> str:
-    return ".".join(str(part) for part in location)
+    safe_parts = (
+        "[]"
+        if isinstance(part, int)
+        else part
+        if part in _SAFE_LOCATION_PARTS
+        else "<unknown>"
+        for part in location
+    )
+    path = ".".join(safe_parts) or "<root>"
+    return path[:_MAX_FIELD_PATH_LENGTH]
 
 
 def _decimal(value: float) -> Decimal:
