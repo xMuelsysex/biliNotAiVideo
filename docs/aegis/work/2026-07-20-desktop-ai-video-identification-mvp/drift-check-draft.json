@@ -6,9 +6,9 @@
     "CONTEXT.md",
     "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md"
   ],
-  "scopeStatus": "Task 1 stayed within scaffold and quality-gate scope.",
-  "compatStatus": "Python 3.12, Node 20 floor, MV3 minimal permissions, and no business behavior preserved.",
-  "retirementStatus": "No fallback or temporary implementation path introduced.",
+  "scopeStatus": "Task 2 remained inside canonical domain scoring and evidence typing.",
+  "compatStatus": "Score semantics, labels, confidence threshold, and future API/model boundaries preserved.",
+  "retirementStatus": "No duplicate scoring owner or fallback introduced.",
   "newRiskSignals": [],
   "decision": "continue"
 }

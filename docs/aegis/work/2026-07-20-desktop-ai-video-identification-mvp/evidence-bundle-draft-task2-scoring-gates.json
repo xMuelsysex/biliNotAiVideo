@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task2-scoring-gates",
+  "type": "command",
+  "source": "backend: ruff, mypy, pytest; task2 scoring suite",
+  "summary": "Canonical scoring contracts passed 56 focused tests and 59 full backend tests with Ruff/mypy.",
+  "verifier": "main agent"
+}

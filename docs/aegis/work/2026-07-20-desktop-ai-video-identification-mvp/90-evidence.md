@@ -25,3 +25,19 @@ No evidence has been recorded yet.
 - Source: independent spec and quality reviewer outputs
 - Summary: Task 1 spec review and final quality review approved after dependency-lock fixes.
 - Verifier: independent subagents
+
+## EvidenceBundleDraft
+
+- Artifact key: task2-scoring-gates
+- Type: command
+- Source: backend: ruff, mypy, pytest; task2 scoring suite
+- Summary: Canonical scoring contracts passed 56 focused tests and 59 full backend tests with Ruff/mypy.
+- Verifier: main agent
+
+## EvidenceBundleDraft
+
+- Artifact key: task2-reviews
+- Type: review
+- Source: independent Task 2 spec and multi-round quality reviews
+- Summary: Spec approved; quality approved after strict validation and bounded diagnostic hardening.
+- Verifier: independent subagents

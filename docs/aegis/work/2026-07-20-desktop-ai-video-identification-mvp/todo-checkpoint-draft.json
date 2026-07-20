@@ -1,17 +1,17 @@
 {
   "schemaVersion": "aegis.schema.v0",
   "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
-  "currentTodo": "Task 2: implement canonical domain and scoring contracts",
+  "currentTodo": "Task 3: create PostgreSQL schema and Alembic migration",
   "completedTodos": [
-    "Task 1: scaffold backend, extension, and quality gates"
+    "Task 1: scaffold backend and extension",
+    "Task 2: canonical domain and scoring contracts"
   ],
-  "activeSlice": "Task 2",
+  "activeSlice": "Task 3",
   "evidenceRefs": [
-    "task1-backend-gates",
-    "task1-extension-gates",
-    "task1-reviews"
+    "task2-scoring-gates",
+    "task2-reviews"
   ],
   "blockedOn": null,
-  "nextStep": "Dispatch Task 2 read-only implementation scout, then implement scoring contracts and focused tests.",
+  "nextStep": "Inspect Task 3 schema requirements and PostgreSQL test availability, then implement models/migration.",
   "updatedAt": "2026-07-20"
 }

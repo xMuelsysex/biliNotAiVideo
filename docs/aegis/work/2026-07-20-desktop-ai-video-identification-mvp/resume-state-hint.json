@@ -2,9 +2,10 @@
   "schemaVersion": "aegis.schema.v0",
   "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
   "lastCheckpointRef": "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/todo-checkpoint-draft.json",
-  "resumeInstruction": "Read 10-intent.md, latest 20-checkpoint.md, CONTEXT.md, approved spec section 11, and plan Task 2 before editing.",
+  "resumeInstruction": "Read latest checkpoint, plan Task 3, spec sections 9-10, CONTEXT.md, and current domain types before schema edits.",
   "knownPartialWork": [
-    "Task 1: scaffold backend, extension, and quality gates"
+    "Task 1: scaffold backend and extension",
+    "Task 2: canonical domain and scoring contracts"
   ],
   "mustReadBeforeContinuing": [
     "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/10-intent.md",
@@ -12,6 +13,6 @@
     "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/todo-checkpoint-draft.json"
   ],
   "unsafeToAssume": [
-    "Do not infer score as duration percentage or let detector/model output assign final labels."
+    "Do not let Redis or ORM convenience become persistent authority; migration must encode constraints."
   ]
 }
