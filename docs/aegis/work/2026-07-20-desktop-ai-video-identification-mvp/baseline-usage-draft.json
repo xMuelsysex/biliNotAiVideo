@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
+  "requiredBaselineRefs": [
+    "CONTEXT.md",
+    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md",
+    "docs/aegis/plans/2026-07-20-desktop-ai-video-identification-mvp.md"
+  ],
+  "deliveredContextRefs": [],
+  "acknowledgedBeforePlanRefs": [],
+  "citedInPlanRefs": [],
+  "missingRefs": [
+    "CONTEXT.md",
+    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md",
+    "docs/aegis/plans/2026-07-20-desktop-ai-video-identification-mvp.md"
+  ],
+  "decision": "needs-baseline-readback"
+}

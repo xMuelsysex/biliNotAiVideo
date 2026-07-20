@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+extension/dist/
+extension/.vite/
+*.tsbuildinfo
+
+# Playwright
+extension/playwright-report/
+extension/test-results/
+extension/blob-report/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Temporary media and generated artifacts
+tmp/
+temp/
+media/
+artifacts/
+*.mp3
+*.m4a
+*.wav
+*.mp4
+*.webm
+*.mkv
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

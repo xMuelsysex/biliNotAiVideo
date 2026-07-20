@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "affectedLayers": [
+    "extension, API, worker, PostgreSQL, Redis, deployment"
+  ],
+  "owners": [
+    "feature/desktop-mvp worktree"
+  ],
+  "invariants": [
+    "PostgreSQL remains persistent authority; Redis is rebuildable; extension never owns authoritative scoring."
+  ],
+  "compatBoundary": "Chrome/Edge MV3, Bilibili pages, /api/v1, PostgreSQL 16, Redis 7.",
+  "nonGoals": [
+    "Mobile, Firefox, Safari, full-video analysis, local multimodal inference, user accounts."
+  ]
+}

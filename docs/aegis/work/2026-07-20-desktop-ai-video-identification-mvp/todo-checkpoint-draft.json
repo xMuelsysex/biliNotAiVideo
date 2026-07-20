@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
+  "currentTodo": "Task 1: scaffold backend, extension, and quality gates",
+  "completedTodos": [],
+  "activeSlice": "Task 1",
+  "evidenceRefs": [],
+  "blockedOn": null,
+  "nextStep": "Dispatch Task 1 implementer, then spec and code-quality reviews.",
+  "updatedAt": "2026-07-20"
+}
