@@ -4,14 +4,11 @@
   "taskIntentRef": "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/task-intent-draft.json",
   "baselineRefs": [
     "CONTEXT.md",
-    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md",
-    "docs/aegis/plans/2026-07-20-desktop-ai-video-identification-mvp.md"
+    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md"
   ],
-  "scopeStatus": "not-yet-verified",
-  "compatStatus": "not-yet-verified",
-  "retirementStatus": "not-yet-verified",
-  "newRiskSignals": [
-    "Greenfield public API, persistent task fencing, external media/model integrations, browser distribution."
-  ],
-  "decision": "needs-baseline-readback"
+  "scopeStatus": "Task 1 stayed within scaffold and quality-gate scope.",
+  "compatStatus": "Python 3.12, Node 20 floor, MV3 minimal permissions, and no business behavior preserved.",
+  "retirementStatus": "No fallback or temporary implementation path introduced.",
+  "newRiskSignals": [],
+  "decision": "continue"
 }

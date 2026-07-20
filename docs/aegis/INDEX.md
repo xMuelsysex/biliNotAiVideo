@@ -17,3 +17,7 @@ Entries are workspace records, not authoritative runtime decisions.
 | 2026-07-20 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/impact-statement-draft.json | Desktop AI Video Identification MVP Execution impact statement draft |
 | 2026-07-20 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/todo-checkpoint-draft.json | Desktop AI Video Identification MVP Execution todo checkpoint draft |
 | 2026-07-20 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/drift-check-draft.json | Desktop AI Video Identification MVP Execution drift check draft |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task1-backend-gates.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task1-backend-gates |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task1-extension-gates.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task1-extension-gates |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/evidence-bundle-draft-task1-reviews.json | 2026-07-20-desktop-ai-video-identification-mvp evidence task1-reviews |
+| 2026-07-21 | artifact | docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/resume-state-hint.json | 2026-07-20-desktop-ai-video-identification-mvp resume state hint |

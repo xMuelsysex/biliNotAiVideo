@@ -1,11 +1,17 @@
 {
   "schemaVersion": "aegis.schema.v0",
   "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
-  "currentTodo": "Task 1: scaffold backend, extension, and quality gates",
-  "completedTodos": [],
-  "activeSlice": "Task 1",
-  "evidenceRefs": [],
+  "currentTodo": "Task 2: implement canonical domain and scoring contracts",
+  "completedTodos": [
+    "Task 1: scaffold backend, extension, and quality gates"
+  ],
+  "activeSlice": "Task 2",
+  "evidenceRefs": [
+    "task1-backend-gates",
+    "task1-extension-gates",
+    "task1-reviews"
+  ],
   "blockedOn": null,
-  "nextStep": "Dispatch Task 1 implementer, then spec and code-quality reviews.",
+  "nextStep": "Dispatch Task 2 read-only implementation scout, then implement scoring contracts and focused tests.",
   "updatedAt": "2026-07-20"
 }

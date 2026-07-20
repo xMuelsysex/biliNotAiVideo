@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task1-backend-gates",
+  "type": "command",
+  "source": "backend: uv lock --check; ruff check .; mypy app; pytest -q",
+  "summary": "Python 3.12 locked environment passed Ruff, strict mypy, import smoke, and 3 tests.",
+  "verifier": "main agent"
+}

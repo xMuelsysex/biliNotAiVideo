@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task1-extension-gates",
+  "type": "command",
+  "source": "extension: npm ci --dry-run; npm run lint; npm run test -- --run; npm run build; manifest assertion",
+  "summary": "Locked Node dependencies passed lint, 4 tests, build, and exact MV3 permission/host checks.",
+  "verifier": "main agent"
+}
