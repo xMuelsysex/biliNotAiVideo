@@ -14,9 +14,8 @@ explainable AI-content evidence labels on Bilibili videos.
 ```bash
 cd backend
 uv python install 3.12
-uv venv --python 3.12 .venv
+uv sync --locked --python 3.12 --extra dev
 . .venv/bin/activate
-uv pip install -e '.[dev]'
 
 ruff check .
 mypy app
@@ -36,7 +35,7 @@ The default development API origin is `http://localhost:8000`.
 
 ```bash
 cd extension
-npm install
+npm ci
 npm run lint
 npm run test -- --run
 npm run build

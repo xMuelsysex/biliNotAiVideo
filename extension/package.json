@@ -17,7 +17,7 @@
     "@crxjs/vite-plugin": "^2.7.1",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.1.1",
+    "@types/node": "^20.19.0",
     "eslint": "^10.7.0",
     "jsdom": "^29.1.1",
     "typescript": "~5.9.3",
