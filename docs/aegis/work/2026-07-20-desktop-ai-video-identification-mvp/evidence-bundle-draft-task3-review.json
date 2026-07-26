@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task3-review",
+  "type": "review",
+  "source": "main-agent line-by-line schema/spec review; independent reviewer attempt blocked by worktree path isolation",
+  "summary": "ORM and migration match the approved seven-table schema, fencing owner, partial active-attempt uniqueness, outbox idempotency, JSONB and check constraints. PostgreSQL execution covers cyclic FK creation and downgrade order.",
+  "verifier": "main agent"
+}

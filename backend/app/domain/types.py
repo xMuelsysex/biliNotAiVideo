@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import StrEnum
 from typing import Literal
 
@@ -9,6 +10,18 @@ _STRICT_IMMUTABLE_CONFIG = ConfigDict(
     strict=True,
     revalidate_instances="always",
 )
+
+
+@dataclass(frozen=True, slots=True)
+class TargetKey:
+    bvid: str
+    cid: int
+
+    def __post_init__(self) -> None:
+        if not self.bvid:
+            raise ValueError("bvid must not be empty")
+        if self.cid <= 0:
+            raise ValueError("cid must be positive")
 
 
 class DetectorKind(StrEnum):

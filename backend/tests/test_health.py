@@ -17,3 +17,4 @@ def test_application_openapi_is_importable() -> None:
 
     assert schema["info"]["title"] == "Bilibili AI Video Identification"
     assert "/health" in schema["paths"]
+    assert "/ready" in schema["paths"]

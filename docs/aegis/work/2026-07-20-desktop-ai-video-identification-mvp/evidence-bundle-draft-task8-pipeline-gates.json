@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task8-pipeline-gates",
+  "type": "command",
+  "source": "Detector and pipeline unit/E2E suites",
+  "summary": "Pipeline saves declarations independently, enters fenced analyzing state, degrades detector-specific failures visibly, cleans media before completed transition, aggregates canonical scores, and rejects stale writes.",
+  "verifier": "main agent"
+}

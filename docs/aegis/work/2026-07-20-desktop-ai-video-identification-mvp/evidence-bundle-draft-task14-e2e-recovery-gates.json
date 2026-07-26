@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task14-e2e-recovery-gates",
+  "type": "command",
+  "source": "Backend shared-result/cleanup/fencing E2E; Docker test-service restart recovery; extension production build and Playwright",
+  "summary": "Two installations observed one completed shared result; reuse created no active work; timeout and worker cancellation removed media; PostgreSQL/Redis restart recovery passed 10 tests; stale fencing held; browser observed queued, analyzing, completed and feed read-only states.",
+  "verifier": "main agent"
+}

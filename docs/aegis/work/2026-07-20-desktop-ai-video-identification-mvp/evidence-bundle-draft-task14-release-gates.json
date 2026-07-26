@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task14-release-gates",
+  "type": "command",
+  "source": "2026-07-26 UTC final full gates over base SHA 4c65990 with recorded dirty worktree: backend ruff/mypy/pytest/alembic check; extension lint, unit, production build, MV3 content-script syntax check, Playwright; compose config; aegis workspace check; git diff --check with secret scan; performance artifact sha256sum",
+  "summary": "After the final precision fixes (yt-dlp locked to worstvideo[height<=360]/worst[height<=360] with no higher-resolution fallback, real-tool media smoke driving MediaAcquirer.sample_frames with real ffmpeg-generated local source, detail-page poll rechecking the absolute deadline after each sleep), backend passed Ruff, strict mypy on 38 files, 141 tests, and Alembic zero-drift check; extension passed ESLint, 23 unit tests in 8 files, tsc+Vite production build with node --check on the emitted MV3 content script, and 2 real-MV3 Playwright E2E tests; Compose rendered exactly 7 services; Aegis workspace check passed; git diff --check and the private-key/token secret scan were clean; performance artifact SHA-256 a76af7facd960b16fe662bf5c9f94e9fe007ae188e1b2c4470aa9e3c697fcf36 and runtime-limit artifact SHA-256 63e06f179a622f99149f34fd1c9dc91dd5cd43024a2ef7b63a4ca9a68d17327c remained unchanged, so the recorded performance evidence still matches the released artifacts.",
+  "verifier": "main agent"
+}

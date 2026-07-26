@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task4-review",
+  "type": "review",
+  "source": "main-agent findings-first transaction review; independent reviewer attempts were blocked or returned no findings because the external worktree was unavailable",
+  "summary": "No Critical or Important finding remained after review. PostgreSQL remains the sole state-transition owner; fencing covers claim, heartbeat, completion and failure; superseded owners become terminal; outbox delivery is explicitly at-least-once and converges through the full idempotency key.",
+  "verifier": "main agent"
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task9-runtime-gates",
+  "type": "command",
+  "source": "Worker runner, repository, recovery, and container restart tests",
+  "summary": "Workers use hostname-unique consumers, durable typed failure/cooldown plus ACK, cancellation leaves messages for lease recovery, heartbeats/fencing hold, Redis/PostgreSQL restart recovery passed, and stale completions cannot overwrite.",
+  "verifier": "main agent"
+}

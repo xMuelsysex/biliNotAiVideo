@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task13-final-resource-performance-gates",
+  "type": "command",
+  "source": "2026-07-26 UTC, base SHA 4c65990 with recorded dirty worktree: docker inspect HostConfig limits; seed_performance_data.py --rows 100000; perf_cached_queries.py --base-url https://localhost:54444 --expected-rows 100000; exit 0",
+  "summary": "Seven steady containers including two workers were limited to 3.75 CPU and 7.0 GiB. With exactly 100,000 result/metadata rows and 20 connections, cached single P95 was 292.33 ms over 36,487 successes and batch-30 P95 was 319.37 ms over 29,232 successes; both had zero failures. Performance artifact SHA-256 a76af7facd960b16fe662bf5c9f94e9fe007ae188e1b2c4470aa9e3c697fcf36; runtime-limit artifact SHA-256 63e06f179a622f99149f34fd1c9dc91dd5cd43024a2ef7b63a4ca9a68d17327c.",
+  "verifier": "main agent"
+}

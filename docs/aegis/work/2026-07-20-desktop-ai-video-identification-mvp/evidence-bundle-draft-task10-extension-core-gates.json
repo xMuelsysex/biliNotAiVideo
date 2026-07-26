@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task10-extension-core-gates",
+  "type": "command",
+  "source": "Extension token/API/identifier/route unit tests and real MV3 Chromium",
+  "summary": "401 clears and re-registers once, runtime messages are typed, native fetch is correctly bound in WorkerGlobalScope, page DOM initial-state parsing maps URL part to cid, token remains in chrome.storage.local, and service worker owns API calls.",
+  "verifier": "main agent"
+}

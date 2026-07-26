@@ -1,17 +1,30 @@
 {
   "schemaVersion": "aegis.schema.v0",
   "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
-  "currentTodo": "Task 3: create PostgreSQL schema and Alembic migration",
+  "currentTodo": "Execution complete: all 14 tasks verified and closed",
   "completedTodos": [
     "Task 1: scaffold backend and extension",
-    "Task 2: canonical domain and scoring contracts"
+    "Task 2: canonical domain and scoring contracts",
+    "Task 3: PostgreSQL schema and Alembic migration",
+    "Task 4: durable repository state machine and recovery",
+    "Task 5: installation registration, authentication, and quotas",
+    "Task 6: analysis query, creation, and batch API",
+    "Task 7: Bilibili metadata and media acquisition",
+    "Task 8: evidence detectors and worker pipeline",
+    "Task 9: worker runner and recovery loops",
+    "Task 10: extension token, API, routing, and identifiers",
+    "Task 11: detail-page automatic analysis UI",
+    "Task 12: recommendation batch badges",
+    "Task 13: deployment, health, cleanup, and performance",
+    "Task 14: final release verification and evidence closure"
   ],
-  "activeSlice": "Task 3",
+  "activeSlice": "closure",
   "evidenceRefs": [
-    "task2-scoring-gates",
-    "task2-reviews"
+    "task13-final-resource-performance-gates",
+    "task14-e2e-recovery-gates",
+    "task14-release-gates"
   ],
   "blockedOn": null,
-  "nextStep": "Inspect Task 3 schema requirements and PostgreSQL test availability, then implement models/migration.",
-  "updatedAt": "2026-07-20"
+  "nextStep": "None; execution is complete and reflection is recorded. Any further work starts a new Aegis task.",
+  "updatedAt": "2026-07-26"
 }

@@ -4,11 +4,14 @@
   "taskIntentRef": "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/task-intent-draft.json",
   "baselineRefs": [
     "CONTEXT.md",
-    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md"
+    "docs/aegis/specs/2026-07-20-desktop-ai-video-identification-design.md",
+    "docs/aegis/plans/2026-07-20-desktop-ai-video-identification-mvp.md"
   ],
-  "scopeStatus": "Task 2 remained inside canonical domain scoring and evidence typing.",
-  "compatStatus": "Score semantics, labels, confidence threshold, and future API/model boundaries preserved.",
-  "retirementStatus": "No duplicate scoring owner or fallback introduced.",
-  "newRiskSignals": [],
+  "scopeStatus": "Task 14 closure stayed inside final verification, evidence recording, and documentation; the last code edits were the three reviewed precision fixes plus the Dockerfile dependency-layer reorder, all within approved Task 13-14 scope.",
+  "compatStatus": "MV3, /api/v1, PostgreSQL authority, Redis rebuildability, exact extension origins, temporary media, 360p media cap, and score semantics remain aligned with the Execution Readiness View.",
+  "retirementStatus": "No mock repository, Redis authority, retained media, alternate score owner, higher-resolution media fallback, or compatibility fallback remains.",
+  "newRiskSignals": [
+    "Performance evidence was collected on a 20-CPU/15.23-GiB host after enforcing the minimum 4-CPU/8-GiB preflight; host differs from the exact recommended profile."
+  ],
   "decision": "continue"
 }

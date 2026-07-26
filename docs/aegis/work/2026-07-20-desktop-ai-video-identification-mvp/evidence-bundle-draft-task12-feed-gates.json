@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task12-feed-gates",
+  "type": "command",
+  "source": "Visibility/card-reuse unit tests and unpacked-extension feed Playwright flow",
+  "summary": "IntersectionObserver gates requests to visible cards, 31 identifiers split at 30, BVs deduplicate, reused cards drop stale badges, absent results remain unchanged, and only batchLookup crosses the runtime channel.",
+  "verifier": "main agent"
+}

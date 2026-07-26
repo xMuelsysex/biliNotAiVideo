@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task7-media-gates",
+  "type": "command",
+  "source": "Metadata/material-loader/media integration and cleanup tests",
+  "summary": "Claimed cid maps to the current Bilibili part page; declaration persists before deep acquisition; subtitle/audio/frame URLs target that page; command timeout, live workspace size monitoring, process-group termination, and cleanup failure are covered.",
+  "verifier": "main agent"
+}

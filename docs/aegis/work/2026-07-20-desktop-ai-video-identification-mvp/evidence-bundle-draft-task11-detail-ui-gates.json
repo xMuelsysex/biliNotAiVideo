@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task11-detail-ui-gates",
+  "type": "command",
+  "source": "Detail controller/UI unit tests and unpacked-extension Playwright flow",
+  "summary": "Real MV3 content script and service worker traverse missing, queued, analyzing, and completed states; declaration, label, confidence, analyzed time, and rule version render; polling uses a bounded sequence plus an absolute 900-second deadline.",
+  "verifier": "main agent"
+}

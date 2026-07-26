@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task4-fault-injection",
+  "type": "command",
+  "source": "Docker Redis restart and PostgreSQL completion-transaction disconnect fault injection",
+  "summary": "Redis restart erased the stream and reconciliation republished the same attempt as generation 1 dispatch epoch 1. PostgreSQL shutdown while completion was blocked produced DBAPIError; after restart the attempt remained fetching and analysis_result count remained zero, proving transaction rollback.",
+  "verifier": "main agent"
+}

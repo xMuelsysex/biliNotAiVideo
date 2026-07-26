@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task6-api-gates",
+  "type": "command",
+  "source": "PostgreSQL/Redis API suites and OpenAPI import",
+  "summary": "Typed GET/POST/batch analysis routes passed idempotent creation, quota-under-lock, version replacement, stale filtering, public error_code, and read-only batch contracts; final backend suite reached 139 passed.",
+  "verifier": "main agent"
+}

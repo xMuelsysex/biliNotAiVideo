@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task4-state-machine-gates",
+  "type": "command",
+  "source": "PostgreSQL 16.14 and Redis 7 integration suite; backend full gates",
+  "summary": "Repository, outbox, and reconciliation passed 13 focused integration tests and 78 full backend tests; Ruff, strict mypy, and Alembic zero-drift check passed.",
+  "verifier": "main agent"
+}

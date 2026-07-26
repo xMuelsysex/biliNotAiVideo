@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task13-deployment-performance-gates",
+  "type": "command",
+  "source": "Docker image builds; Compose migration/health/TLS smoke; 100k-row fixed performance protocol",
+  "summary": "Backend and extension images built from bounded contexts; isolated Compose stack migrated and stayed healthy; cached single P95 199.98 ms and batch-30 P95 229.14 ms with 0 errors across 50,447 and 40,379 successes. Per-workspace byte, media-command timeout, and whole-job timeout gates passed.",
+  "verifier": "main agent"
+}

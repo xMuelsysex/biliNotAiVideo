@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "task5-auth-quota-gates",
+  "type": "command",
+  "source": "PostgreSQL 16.14 and Redis 7 API/unit suite; backend full gates",
+  "summary": "Installation registration, SHA-256-only persistence, authentication, bounded last-used writes, idle rejection, atomic rotation, registration/query/analysis limits, and exact extension-origin CORS passed 13 focused tests and 89 full backend tests; Ruff, strict mypy, and Alembic zero-drift check passed.",
+  "verifier": "main agent"
+}

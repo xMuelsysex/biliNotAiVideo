@@ -1,0 +1,7 @@
+{$CADDY_SITE_ADDRESS:https://localhost} {
+	tls /certs/site.pem /certs/site-key.pem
+
+	reverse_proxy /api/* api:8000
+	reverse_proxy /health api:8000
+	reverse_proxy /ready api:8000
+}

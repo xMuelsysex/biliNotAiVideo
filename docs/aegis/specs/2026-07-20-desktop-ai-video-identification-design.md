@@ -376,6 +376,8 @@ Stable failure classes:
 - Audio unavailable or speech absent.
 - Frame extraction failure.
 - Text or visual detector timeout.
+- Media command timeout.
+- Per-task workspace byte limit exceeded.
 - Evidence insufficient.
 - Temporary storage cleanup failure.
 

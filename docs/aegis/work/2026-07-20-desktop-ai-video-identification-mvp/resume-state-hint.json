@@ -2,10 +2,22 @@
   "schemaVersion": "aegis.schema.v0",
   "taskId": "2026-07-20-desktop-ai-video-identification-mvp",
   "lastCheckpointRef": "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/todo-checkpoint-draft.json",
-  "resumeInstruction": "Read latest checkpoint, plan Task 3, spec sections 9-10, CONTEXT.md, and current domain types before schema edits.",
+  "resumeInstruction": "Execution finished on 2026-07-26 with all release gates green and evidence recorded; do not resume this work record. Start a new task for follow-up work such as merging feature/desktop-mvp.",
   "knownPartialWork": [
     "Task 1: scaffold backend and extension",
-    "Task 2: canonical domain and scoring contracts"
+    "Task 2: canonical domain and scoring contracts",
+    "Task 3: PostgreSQL schema and Alembic migration",
+    "Task 4: durable repository state machine and recovery",
+    "Task 5: installation registration, authentication, and quotas",
+    "Task 6: analysis query, creation, and batch API",
+    "Task 7: Bilibili metadata and media acquisition",
+    "Task 8: evidence detectors and worker pipeline",
+    "Task 9: worker runner and recovery loops",
+    "Task 10: extension token, API, routing, and identifiers",
+    "Task 11: detail-page automatic analysis UI",
+    "Task 12: recommendation batch badges",
+    "Task 13: deployment, health, cleanup, and performance",
+    "Task 14: final release verification and evidence closure"
   ],
   "mustReadBeforeContinuing": [
     "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/10-intent.md",
@@ -13,6 +25,6 @@
     "docs/aegis/work/2026-07-20-desktop-ai-video-identification-mvp/todo-checkpoint-draft.json"
   ],
   "unsafeToAssume": [
-    "Do not let Redis or ORM convenience become persistent authority; migration must encode constraints."
+    "The worktree changes after base SHA 4c65990 have not been committed or merged; releasing still requires the owner to commit, review, and merge feature/desktop-mvp."
   ]
 }

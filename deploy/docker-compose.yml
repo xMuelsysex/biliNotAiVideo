@@ -1,0 +1,166 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${POSTGRES_CPUS:-0.75}"
+          memory: ${POSTGRES_MEMORY:-2g}
+
+  redis:
+    image: redis:7
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${REDIS_CPUS:-0.25}"
+          memory: ${REDIS_MEMORY:-512m}
+
+  migrate:
+    build:
+      context: ../backend
+      dockerfile: ../deploy/backend.Dockerfile
+    command: ["alembic", "upgrade", "head"]
+    environment:
+      BILI_AI_DATABASE_URL: ${BILI_AI_DATABASE_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: "${MIGRATE_CPUS:-0.5}"
+          memory: ${MIGRATE_MEMORY:-512m}
+
+  api:
+    build:
+      context: ../backend
+      dockerfile: ../deploy/backend.Dockerfile
+    command: ["python", "-m", "app", "api"]
+    environment:
+      BILI_AI_DATABASE_URL: ${BILI_AI_DATABASE_URL}
+      BILI_AI_REDIS_URL: ${BILI_AI_REDIS_URL}
+      BILI_AI_ALLOWED_EXTENSION_ORIGINS: ${BILI_AI_ALLOWED_EXTENSION_ORIGINS}
+      BILI_AI_QUERY_PER_MINUTE_LIMIT: ${BILI_AI_QUERY_PER_MINUTE_LIMIT:-60}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://127.0.0.1:8000/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${API_CPUS:-0.75}"
+          memory: ${API_MEMORY:-1g}
+
+  dispatcher:
+    build:
+      context: ../backend
+      dockerfile: ../deploy/backend.Dockerfile
+    command: ["python", "-m", "app", "dispatcher"]
+    environment:
+      BILI_AI_DATABASE_URL: ${BILI_AI_DATABASE_URL}
+      BILI_AI_REDIS_URL: ${BILI_AI_REDIS_URL}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${DISPATCHER_CPUS:-0.25}"
+          memory: ${DISPATCHER_MEMORY:-256m}
+
+  worker:
+    build:
+      context: ../backend
+      dockerfile: ../deploy/backend.Dockerfile
+    command: ["python", "-m", "app", "worker"]
+    environment:
+      BILI_AI_DATABASE_URL: ${BILI_AI_DATABASE_URL}
+      BILI_AI_REDIS_URL: ${BILI_AI_REDIS_URL}
+      BILI_AI_MEDIA_TEMP_ROOT: ${BILI_AI_MEDIA_TEMP_ROOT}
+      BILI_AI_MEDIA_WORKSPACE_MAX_BYTES: ${BILI_AI_MEDIA_WORKSPACE_MAX_BYTES:-268435456}
+      BILI_AI_MEDIA_COMMAND_TIMEOUT_SECONDS: ${BILI_AI_MEDIA_COMMAND_TIMEOUT_SECONDS:-300}
+      BILI_AI_ANALYSIS_TASK_TIMEOUT_SECONDS: ${BILI_AI_ANALYSIS_TASK_TIMEOUT_SECONDS:-900}
+      BILI_AI_BCUT_API_BASE: ${BILI_AI_BCUT_API_BASE}
+      BILI_AI_AI_API_BASE: ${BILI_AI_AI_API_BASE}
+      BILI_AI_AI_API_KEY: ${BILI_AI_AI_API_KEY}
+      BILI_AI_AI_MODEL: ${BILI_AI_AI_MODEL}
+      BILI_AI_BILIBILI_COOKIE: ${BILI_AI_BILIBILI_COOKIE}
+    tmpfs:
+      - /tmp/bili-ai-media:size=2g,mode=1777
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      replicas: ${WORKER_REPLICAS:-2}
+      resources:
+        limits:
+          cpus: "${WORKER_CPUS:-0.75}"
+          memory: ${WORKER_MEMORY:-1536m}
+
+  caddy:
+    image: caddy:2.9-alpine
+    environment:
+      CADDY_SITE_ADDRESS: ${CADDY_SITE_ADDRESS:-https://localhost}
+    ports:
+      - "${TLS_PORT:-443}:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ${TLS_CERT_PATH}:/certs/site.pem:ro
+      - ${TLS_KEY_PATH}:/certs/site-key.pem:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "${CADDY_CPUS:-0.25}"
+          memory: ${CADDY_MEMORY:-256m}
+
+  extension-build:
+    profiles: ["extension"]
+    build:
+      context: ../extension
+      dockerfile: ../deploy/extension.Dockerfile
+      args:
+        VITE_API_ORIGIN: ${VITE_API_ORIGIN}
+    volumes:
+      - ../extension/dist:/out
+
+volumes:
+  postgres_data:
